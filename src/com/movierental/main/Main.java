@@ -1,3 +1,9 @@
+package com.movierental.main;
+
+import com.movierental.model.Customer;
+import com.movierental.model.MovieRental;
+import com.movierental.rentaldetail.RentalInfo;
+
 import java.util.Arrays;
 
 public class Main {

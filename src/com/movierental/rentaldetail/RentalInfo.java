@@ -1,3 +1,9 @@
+package com.movierental.rentaldetail;
+
+import com.movierental.model.Customer;
+import com.movierental.model.Movie;
+import com.movierental.model.MovieRental;
+
 import java.util.HashMap;
 
 public class RentalInfo {
