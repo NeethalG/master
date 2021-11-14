@@ -1,22 +1,29 @@
 package com.movierental.main;
 
+import com.movierental.constants.Constants;
 import com.movierental.model.Customer;
 import com.movierental.model.MovieRental;
 import com.movierental.rentaldetail.RentalInfo;
 
 import java.util.Arrays;
+import java.util.logging.Logger;
 
 public class Main {
+    public static final Logger log = Logger.getLogger(Main.class.getName());
 
-  public static void main(String[] args) {
-    String expected = "Rental Record for C. U. Stomer\n\tYou've Got Mail\t3.5\n\tMatrix\t2.0\nAmount owed is 5.5\nYou earned 2 frequent points\n";
+    public static void main(String[] args) {
 
-    String result = new RentalInfo().statement(new Customer("C. U. Stomer", Arrays.asList(new MovieRental("F001", 3), new MovieRental("F002", 1))));
+        String result = new RentalInfo().getRentalDetails(new Customer(Constants.CUSTOMER_NAME, Arrays.asList(
+                new MovieRental(Constants.MOV_1_ID, 3),
+                new MovieRental(Constants.MOV_2_ID, 1))));
 
-    if (!result.equals(expected)) {
-      throw new AssertionError("Expected: " + System.lineSeparator() + String.format(expected) + System.lineSeparator() + System.lineSeparator() + "Got: " + System.lineSeparator() + result);
+        if (!result.equals(Constants.RESULT_STR)) {
+            throw new AssertionError("Expected: " + System.lineSeparator()
+                    + String.format(Constants.CUSTOMER_NAME)
+                    + System.lineSeparator() + System.lineSeparator()
+                    + "Got: " + System.lineSeparator() + result);
+        }
+
+        log.info("Success");
     }
-
-    System.out.println("Success");
-  }
 }
