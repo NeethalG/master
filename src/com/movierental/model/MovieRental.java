@@ -2,18 +2,18 @@ package com.movierental.model;
 
 public class MovieRental {
     private String movieId;
-    private int days;
+    private int rentalDays;
 
-    public MovieRental(String movieId, int days) {
+    public MovieRental(String movieId, int rentalDays) {
         this.movieId = movieId;
-        this.days = days;
+        this.rentalDays = rentalDays;
     }
 
     public String getMovieId() {
         return movieId;
     }
 
-    public int getDays() {
-        return days;
+    public int getRentalDays() {
+        return rentalDays;
     }
 }

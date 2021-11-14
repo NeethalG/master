@@ -4,18 +4,18 @@ import java.util.List;
 
 public class Customer {
     private String name;
-    private List<MovieRental> rentals;
+    private List<MovieRental> movieRentals;
 
-    public Customer(String name, List<MovieRental> rentals) {
+    public Customer(String name, List<MovieRental> movieRentals) {
         this.name = name;
-        this.rentals = rentals;
+        this.movieRentals = movieRentals;
     }
 
     public String getName() {
         return name;
     }
 
-    public List<MovieRental> getRentals() {
-        return rentals;
+    public List<MovieRental> getMovieRentals() {
+        return movieRentals;
     }
 }

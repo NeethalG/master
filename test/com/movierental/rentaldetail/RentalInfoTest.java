@@ -1,5 +1,6 @@
 package com.movierental.rentaldetail;
 
+import com.movierental.constants.RentalMessages;
 import com.movierental.model.Customer;
 import com.movierental.model.MovieRental;
 import org.junit.Test;
@@ -13,13 +14,13 @@ public class RentalInfoTest {
     @Test
     public void testCustomer_null() {
         String result = new RentalInfo().getRentalDetails(null);
-        assertEquals("No Customer Present", result);
+        assertEquals(RentalMessages.NO_CUSTOMER_PRESENT, result);
     }
 
     @Test
     public void testCustomer_null_rentals() {
         String result = new RentalInfo().getRentalDetails(new Customer("testCustomer", null));
-        assertEquals("No Movie Rentals for Customer", result);
+        assertEquals(RentalMessages.NO_RENTALS, result);
     }
 
     @Test

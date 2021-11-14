@@ -1,6 +1,6 @@
 package com.movierental.main;
 
-import com.movierental.constants.Constants;
+import com.movierental.constants.RentalMessages;
 import com.movierental.model.Customer;
 import com.movierental.model.MovieRental;
 import com.movierental.rentaldetail.RentalInfo;
@@ -13,17 +13,17 @@ public class Main {
 
     public static void main(String[] args) {
 
-        String result = new RentalInfo().getRentalDetails(new Customer(Constants.CUSTOMER_NAME, Arrays.asList(
-                new MovieRental(Constants.MOV_1_ID, 3),
-                new MovieRental(Constants.MOV_2_ID, 1))));
+        String result = new RentalInfo().getRentalDetails(new Customer(RentalMessages.TEST_CUSTOMER_NAME, Arrays.asList(
+                new MovieRental(RentalMessages.TEST_MOV_1_ID, 3),
+                new MovieRental(RentalMessages.TEST_MOV_2_ID, 1))));
 
-        if (!result.equals(Constants.RESULT_STR)) {
+        if (!result.equals(RentalMessages.RESULT_STR)) {
             throw new AssertionError("Expected: " + System.lineSeparator()
-                    + String.format(Constants.CUSTOMER_NAME)
+                    + String.format(RentalMessages.TEST_CUSTOMER_NAME)
                     + System.lineSeparator() + System.lineSeparator()
                     + "Got: " + System.lineSeparator() + result);
         }
 
-        log.info("Success");
+        log.info(RentalMessages.SUCCESS_MSG);
     }
 }

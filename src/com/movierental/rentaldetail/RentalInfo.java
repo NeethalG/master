@@ -1,6 +1,7 @@
 package com.movierental.rentaldetail;
 
-import com.movierental.constants.Constants;
+import com.movierental.constants.MovieCode;
+import com.movierental.constants.RentalMessages;
 import com.movierental.constants.RentalMovies;
 import com.movierental.model.Customer;
 import com.movierental.model.Movie;
@@ -14,28 +15,28 @@ public class RentalInfo {
 
     public String getRentalDetails(Customer customer) {
 
-        if (null == customer) return "No Customer Present";
-        if (null == customer.getRentals()) return "No Movie Rentals for Customer";
+        if (null == customer) return RentalMessages.NO_CUSTOMER_PRESENT;
+        if (null == customer.getMovieRentals()) return RentalMessages.NO_RENTALS;
         // build the movie map
         Map<String, Movie> movies = buildMovieDetailsMap();
 
         double totalAmount = 0;
         int frequentEnterPoints = 0;
         StringBuilder resultBuilder = new StringBuilder();
-        resultBuilder.append("Rental Record for " + customer.getName() + "\n");
+        resultBuilder.append(String.format(RentalMessages.RENTAL_RECORD_FOR_CUSTOMER, customer.getName()));
 
-        for (MovieRental r : customer.getRentals()) {
+        for (MovieRental r : customer.getMovieRentals()) {
             double thisAmount = 0;
             String movieCode = movies.get(r.getMovieId()).getCode();
             String movieTitle = movies.get(r.getMovieId()).getTitle();
-            int numDays = r.getDays();
+            int numDays = r.getRentalDays();
 
             thisAmount = findTotalAmountForMovie(movieCode, numDays);
 
             //add frequent bonus points
             frequentEnterPoints++;
             // add bonus for a two day new release rental
-            if (Constants.CODE_NEW.equals(movieCode) && numDays > 2) frequentEnterPoints++;
+            if (MovieCode.NEW.getCode().equals(movieCode) && numDays > 2) frequentEnterPoints++;
 
 
             //print figures for this rental
@@ -43,8 +44,8 @@ public class RentalInfo {
             totalAmount = totalAmount + thisAmount;
         }
         // add footer lines
-        resultBuilder.append("Amount owed is " + totalAmount + "\n");
-        resultBuilder.append("You earned " + frequentEnterPoints + " frequent points\n");
+        resultBuilder.append(String.format(RentalMessages.AMNT_OWED, totalAmount));
+        resultBuilder.append(String.format(RentalMessages.FREQ_POINTS__EARNED, frequentEnterPoints));
 
         return resultBuilder.toString();
     }
@@ -60,12 +61,14 @@ public class RentalInfo {
     public double findTotalAmountForMovie(String movieCode, int numDays) {
         double amount = 0;
         // determine amount for each movie
-        if (Constants.CODE_REGULAR.equals(movieCode)) {
-            amount = numDays > 2 ? ((numDays - 2) * 1.5) + Constants.AMNT_REG : Constants.AMNT_REG;
-        } else if (Constants.CODE_CHILDRENS.equals(movieCode)) {
-            amount = numDays > 3 ? ((numDays - 3) * 1.5) + Constants.AMNT_CHLDRNS : Constants.AMNT_CHLDRNS;
-        } else if (Constants.CODE_NEW.equals(movieCode)) {
-            amount = numDays * Constants.AMNT_NEW;
+        if (MovieCode.REGULAR.getCode().equals(movieCode)) {
+            amount = numDays > 2 ? ((numDays - 2) * 1.5) + MovieCode.REGULAR.getBaseRent()
+                    : MovieCode.REGULAR.getBaseRent();
+        } else if (MovieCode.CHILDRENS.getCode().equals(movieCode)) {
+            amount = numDays > 3 ? ((numDays - 3) * 1.5) + MovieCode.CHILDRENS.getBaseRent()
+                    : MovieCode.CHILDRENS.getBaseRent();
+        } else if (MovieCode.NEW.getCode().equals(movieCode)) {
+            amount = numDays * MovieCode.NEW.getBaseRent();
         }
         return amount;
     }
