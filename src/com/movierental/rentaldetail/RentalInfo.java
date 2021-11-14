@@ -45,7 +45,7 @@ public class RentalInfo {
         }
         // add footer lines
         resultBuilder.append(String.format(RentalMessages.AMNT_OWED, totalAmount));
-        resultBuilder.append(String.format(RentalMessages.FREQ_POINTS__EARNED, frequentEnterPoints));
+        resultBuilder.append(String.format(RentalMessages.FREQ_POINTS_EARNED, frequentEnterPoints));
 
         return resultBuilder.toString();
     }

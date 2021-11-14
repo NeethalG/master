@@ -17,5 +17,5 @@ public class RentalMessages {
     public static final String NO_RENTALS = "No Movie Rentals for Customer";
     public static final String RENTAL_RECORD_FOR_CUSTOMER = "Rental Record for %s\n";
     public static final String AMNT_OWED = "Amount owed is %s\n";
-    public static final String FREQ_POINTS__EARNED = "You earned %s frequent points\n";
+    public static final String FREQ_POINTS_EARNED = "You earned %s frequent points\n";
 }
